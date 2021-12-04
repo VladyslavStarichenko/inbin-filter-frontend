@@ -1,0 +1,46 @@
+.footer-wrapper {
+  background-color: rgb(74, 74, 74);
+
+  .footer-upper-section {
+
+    .footer-menu-wrapper {
+
+      .menu-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        position: relative;
+        top: 10px;
+        left: 40px;
+      }
+
+      .list-of-menu {
+        list-style: none;
+        display: flex;
+
+        & > li {
+          color: #fff;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  .footer-text-wrapper {
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    .copyright-text {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      position: relative;
+      bottom: 15px;
+    }
+  }
+}
