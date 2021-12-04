@@ -1,0 +1,243 @@
+.welcome-page-wrapper {
+
+  .welcome-picture-container {
+    width: 100%;
+    height: 300px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+
+  .find-out-more-container {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    .new-bine {
+      font-size: 28px;
+      font-weight: 700;
+      color: rgb(60, 182, 73);
+      line-height: 34px;
+      margin: 0;
+    }
+
+    .description-bine {
+      color: rgb(74, 74, 74);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 27px;
+    }
+
+    .description-btn {
+      height: 43px;
+      width: 180px;
+      border: none;
+      background-color: rgb(60, 182, 73);
+
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 27px;
+      color: #fff;
+    }
+  }
+
+  .description-image-block {
+    width: 88%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    margin: {
+      left: 10px;
+    }
+
+    .description-block {
+      width: 50%;
+
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .smart-title {
+        font-size: 54px;
+        font-weight: 700;
+        color: rgb(35, 31, 32);
+
+        .important {
+          color: rgb(60, 182, 73);
+        }
+      }
+
+      .smart-description {
+        font-size: 23px;
+        font-weight: 600;
+        color: #4a4a4a;
+        line-height: 27px;
+        text-align: left;
+
+        position: relative;
+        bottom: 45px;
+      }
+    }
+
+    .description-image {
+      width: 50%;
+    }
+  }
+
+  .icon-wrapper {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    .left-section {
+      width: 50%;
+
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+
+      .image-span-container {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .icon-text {
+          color: #4a4a4a;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.25em;
+
+          height: 30px;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      .take-up {
+        position: relative;
+        top: -14px;
+      }
+    }
+
+    .right-section {
+      width: 50%;
+
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+
+      div {
+        img {
+          display: block;
+          margin: {
+            left: auto;
+            right: auto;
+          };
+        }
+
+        .icon-text {
+          color: #4a4a4a;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.25em;
+
+          height: 30px;
+          display: block;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .first-innovation-plus {
+    height: 576px;
+    margin-top: 30px;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    .first-plus-image {
+      width: 50%;
+      height: 100%;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .first-plus-description {
+      width: 50%;
+      height: 100%;
+      background-color: #585657;
+
+      display: flex;
+      align-items: center;
+      flex-flow: column nowrap;
+      justify-content: center;
+
+      div {
+        width: 600px;
+
+        .first-plus-text {
+          color: #fff;
+          font-size: 35px;
+          font-weight: 700;
+        }
+
+        .first-plus-paragraph {
+          color: #fff;
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .second-innovation-plus {
+    height: 500px;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    .second-plus-description {
+      width: 50%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      flex-flow: column nowrap;
+      justify-content: center;
+
+      div {
+        width: 600px;
+
+        .second-plus-text {
+          color: #231f20;
+          font-size: 35px;
+          font-weight: 700;
+        }
+
+        .second-plus-paragraph {
+          color: #4a4a4a;
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .second-plus-image {
+      width: 50%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
