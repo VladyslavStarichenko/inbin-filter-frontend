@@ -1,4 +1,5 @@
 // Modules
+import { useNavigate } from 'react-router-dom';
 import { useCallback, useState, useMemo } from 'react';
 
 // Styles
@@ -8,25 +9,27 @@ function Header() {
   // TODO Change btns depending on the state
   const [isAuth] = useState(false);
 
+  const navigate = useNavigate();
+
   const howItWorksHandler = useCallback(() => {
-    console.log('How it wokrs handler.');
-  }, []);
+    navigate('/howitworks');
+  }, [navigate]);
 
   const customizationHandler = useCallback(() => {
-    console.log('Customization handler.');
-  }, []);
+    navigate('/customization');
+  }, [navigate]);
 
   const missionHandler = useCallback(() => {
-    console.log('Mission handler.');
-  }, []);
+    navigate('/mission');
+  }, [navigate]);
 
   const contactUsHandler = useCallback(() => {
-    console.log('Contact us.');
-  }, []);
+    navigate('/contactus');
+  }, [navigate]);
 
   const logInHandler = useCallback(() => {
-    console.log('Log in handler.');
-  }, []);
+    navigate('/login')
+  }, [navigate]);
 
   const buttonsData = useMemo(() => {
     return {
