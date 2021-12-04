@@ -7,7 +7,7 @@ import './styles.scss';
 function Footer() {
   const menuOptions = useMemo(() => {
     return ['How It Works', 'Customization',
-      'Mission', 'Press Kit', 'Log in', 'Contact'];
+      'Mission', 'Press Kit', 'Contact'];
   }, []);
 
   return (
