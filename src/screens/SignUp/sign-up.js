@@ -1,82 +1,133 @@
-// Modules
-import { useCallback, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField } from '@material-ui/core';
-import isEqual from 'lodash/isEqual';
-// Styles
-import './styles.scss';
-// TODO Change it for endpoints methods
-const signUp = () => console.log('Hello world');
-const logIn = () => console.log('User successfuly loged in');
-const defaultValues = Object.freeze({
-  username: "",
-  password: "",
-});
+import {
+  TextField,
+  Grid,
+  makeStyles,
+  Container,
+  Button,
+  Typography,
+} from '@material-ui/core';
+import api from '../../api';
+import useAuth from '../../hooks/useAuth/useAuth';
+import { useState } from 'react';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+    marginTop: '100px',
+  },
+  buttonSpacing: {
+    marginLeft: '100px',
+    marginTop: '30px',
+  },
+  loginBtn: {
+    marginTop: '30px',
+    marginRight: '40px',
+    width: '100%',
+    height: '60px',
+  },
+  input: {
+    marginTop: '30px',
+  }
+}));
+
 function SignUp() {
-  const [logInData, setLoginData] = useState({});
-  const [isSignUpSucceed, setSignUpSucceed] = useState(false);
-  const { reset, register, handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
-  const requiredRules = { required: true };
-  const onSubmit = (data) => console.log(data);
+  const auth = useAuth();
+  const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignUp = useCallback(async (data) => {
-    try {
-      const response = await signUp(data);
-      if (response.status === 200 || response.status === 201) {
-        setSignUpSucceed(true);
-        const { username, password } = data;
-        // ! here we set log in data for new user setLogInData({ username, password });
-      } else {
-        setSignUpSucceed(false);
-      }
-    } catch (error) {
-      setSignUpSucceed(false);
-    }
-  }, []);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleLogIn = useCallback(async () => {
+  const onSubmit = async (data) => {
+    console.log(data);
     try {
-      const response = await logIn(logInData);
-      // TODO Add one more condition to check
-      if (isEqual(response.status, 200)) {
-        // TODO setLoggedIn(response.data.token);
-      }
-    } catch (error) {
-      setSignUpSucceed(false);
+      setIsLoading(true);
+      const result = await api.auth.signup(data);
+      console.log(result);
+      const { data: loginData } = await api.auth.login(data);
+
+      auth.setToken(loginData.token);
+      auth.setUser(loginData.user);
+    } catch (e) {
+      // if (e.response.status === 422) {
+      //   Object.keys(e.response.data.errors).forEach((key) => {
+      //     setError(key, {
+      //       type: "manual",
+      //       message: e.response.data.errors[key],
+      //     });
+      //   });
+      // }
+    } finally {
+      setIsLoading(false);
     }
-  }, [logInData]);
+  };
 
   return (
-    <div className='sign-up-outer-container'>
-      <h1 className='header-text'>Sign up</h1>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            control={control}
-            name='username'
-            render={({ field, fieldState: { error } }) => {
-              return (
-                <TextField label='Username' variant='filled' error={!!error} {...field} />
-              );
-            }}
-            rules={requiredRules}
-          />
-          <Controller
-            control={control}
-            name='password'
-            render={({ field, fieldState: { error } }) => {
-              return (
-                <TextField label='Password'  variant='filled' type='password' error={!!error} {...field} />
-              );
-            }}
-            rules={requiredRules}
-          />
-          <button type='submit'>
+    <Container maxWidth="xs" className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h6">
             Sign up
-          </button>
+          </Typography>
+        </Grid>
+      </Grid>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Controller
+                name="username"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    error={Boolean(errors.username?.message)}
+                    type="username"
+                    label="Username"
+                    fullWidth
+                    variant="filled"
+                    helperText={errors.username?.message}
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  error={Boolean(errors.password?.message)}
+                  type="password"
+                  fullWidth
+                  className={classes.input}
+                  label="Password"
+                  variant="filled"
+                  helperText={errors.password?.message}
+                />
+              )}
+            />
+          </Grid>
+
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className={classes.loginBtn}
+            disabled={isLoading}
+          >
+            Sign up
+          </Button>
         </form>
-      </div>
-    </div>
+    </Container>
   );
 }
 
