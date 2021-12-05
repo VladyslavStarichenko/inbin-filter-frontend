@@ -1,0 +1,140 @@
+.contact-us-common-wapper {
+  margin-top: 50px;
+
+  .text-container {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    .contact-us-text {
+      color: #3cb649;
+      font-size: 35px;
+      font-weight: 700;
+    }
+
+    .write-us-message {
+      color: #363636;
+      font-size: 22px;
+      font-weight: 700;
+      position: relative;
+      bottom: 20px;
+    }
+  }
+
+  .form-container {
+    .email-phone-outer-wrapper {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+
+      & > div {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .email-input {
+          width: 216px;
+          height: 34px;
+          margin-right: 10px;
+          outline: none;
+          font-size: 18px;
+          font-weight: 400;
+          padding-left: 6px;
+          border: 1px solid rgb(133, 133, 133);
+
+          &:focus {
+            border: 1px solid #3cb649;
+          }
+        }
+
+        .email-error {
+          top: 8px;
+          left: 0px;
+          color: #cc0000;
+          position: relative;
+          font-size: 14px;
+        }
+      }
+
+      & > div {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .phone-input {
+          width: 216px;
+          height: 34px;
+          margin-left: 10px;
+          outline: none;
+          font-size: 18px;
+          font-weight: 400;
+          padding-left: 6px;
+          border: 1px solid rgb(133, 133, 133);
+
+          &:focus {
+            border: 1px solid #3cb649;
+          }
+        }
+
+        .phone-error {
+          position: relative;
+          top: 8px;
+          left: 10px;
+          color: #cc0000;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .message-submit-container {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+
+      & > textarea {
+        min-height: 120px;
+        max-height: 300px;
+        max-width: 465px;
+        min-width: 465px;
+        outline: none;
+        margin-top: 20px;
+
+        font-size: 18px;
+        font-weight: 400;
+
+        padding-top: 5px;
+        padding-left: 5px;
+
+        &:focus {
+          border: 1px solid #3cb649;
+        }
+      }
+
+      .message-error {
+        position: relative;
+        top: 8px;
+        left: 10px;
+        color: #cc0000;
+        font-size: 14px;
+      }
+
+      & > input {
+        margin-top: 20px;
+        background: #3cb649;
+        padding: 14px 18px;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 700;
+        border: 0;
+        transition: all .3s ease;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.error {
+  border: 1px solid #cc0000 !important;
+}
