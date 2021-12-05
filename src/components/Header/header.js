@@ -1,13 +1,13 @@
 // Modules
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 // Styles
 import './styles.scss';
+import useAuth from '../../hooks/useAuth/useAuth';
 
 function Header() {
-  // TODO Change btns depending on the state
-  const [isAuth] = useState(false);
+  const auth = useAuth();
 
   const navigate = useNavigate();
 
@@ -27,7 +27,13 @@ function Header() {
     navigate('/login')
   }, [navigate]);
 
-  const buttonsData = useMemo(() => {
+  const logOutHandler = useCallback(() => {
+    localStorage.clear();
+    auth.logOut();
+    navigate('/');
+  }, [auth, navigate]);
+
+  const notLoggedInBtns = useMemo(() => {
     return {
       'howItWorks': { label: 'how it works', handler: howItWorksHandler },
       'mission': { label: 'mission', handler: missionHandler },
@@ -41,19 +47,31 @@ function Header() {
     ],
   );
 
+  const loggedInBtns = useMemo(() => {
+    return {
+      'logout': { label: 'Log out', handler: logOutHandler },
+    };
+  }, [logOutHandler]);
+
   return (
     <header className="header-wrapper">
       <div className="header-wrapper__name" onClick={mainPage}>
         Inbin <span>Filter</span>
       </div>
       <div className="header-wrapper__buttons">
-        {Object.keys(buttonsData).map((btn, idx) => {
+        {localStorage.getItem('token') ? (Object.keys(loggedInBtns).map((btn, idx) => {
           return (
-            <button key={idx} onClick={buttonsData[btn].handler}>
-              {buttonsData[btn].label}
+            <button key={idx} onClick={loggedInBtns[btn].handler}>
+              {loggedInBtns[btn].label}
             </button>
           );
-        })}
+        })) : (Object.keys(notLoggedInBtns).map((btn, idx) => {
+          return (
+            <button key={idx} onClick={notLoggedInBtns[btn].handler}>
+              {notLoggedInBtns[btn].label}
+            </button>
+          );
+        }))}
       </div>
     </header>
   );
