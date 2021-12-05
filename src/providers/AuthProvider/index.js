@@ -14,10 +14,8 @@ function AuthProvider(props) {
 
     if (tokenData) {
       Cookies.set("auth-token", tokenData);
-      localStorage.setItem('token', tokenData);
     } else {
       Cookies.remove("auth-token");
-      localStorage.removeItem('token', tokenData);
     }
   }, []);
 

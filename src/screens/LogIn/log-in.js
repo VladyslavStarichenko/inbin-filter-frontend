@@ -113,7 +113,7 @@ function LogIn() {
                   className={classes.input}
                   label="Password"
                   variant="filled"
-                  {...register("password", { required: "Password is a required field.", minLength: 8 })}
+                  {...register("password", { required: "Password is a required field.", minLength: 4 })}
                   helperText={errors.password?.message}
                 />
               )}
