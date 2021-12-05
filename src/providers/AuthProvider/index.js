@@ -14,14 +14,17 @@ function AuthProvider(props) {
 
     if (tokenData) {
       Cookies.set("auth-token", tokenData);
+      localStorage.setItem('token', tokenData);
     } else {
       Cookies.remove("auth-token");
+      localStorage.removeItem('token', tokenData);
     }
   }, []);
 
   const logOut = useCallback(() => {
     setUser(null);
     setToken(null);
+    localStorage.clear();
   }, [setToken]);
 
   const loadData = useCallback(async () => {
