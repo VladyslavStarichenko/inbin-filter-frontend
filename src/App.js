@@ -11,6 +11,7 @@ import Mission from './screens/Mission';
 
 // Styles
 import './App.css';
+import SignUp from './screens/SignUp';
 
 const NoMatch = () => {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/howitworks" element={<HowItWorks />} />
         <Route path="/mission" element={<Mission />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
       <Footer />
