@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WelcomePage from './screens/WelcomePage';
-import ContactUs from './screens/HowItWorks';
+import ContactUs from './screens/ContactUs';
 import Customization from './screens/Customization';
 import HowItWorks from './screens/HowItWorks';
 import LogIn from './screens/LogIn';
