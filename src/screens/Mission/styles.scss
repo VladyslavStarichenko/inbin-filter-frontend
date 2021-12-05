@@ -1,0 +1,39 @@
+.mission-outer-container {
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+
+  .forest-background-image {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  .mission-description {
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 5%;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid grey;
+
+    .mission-header {
+      font-size: 70px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .mission-text {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1;
+    }
+  }
+}
