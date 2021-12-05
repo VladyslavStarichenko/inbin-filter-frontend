@@ -5,8 +5,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WelcomePage from './screens/WelcomePage';
-import ContactUs from './screens/ContactUs';
-import Customization from './screens/Customization';
 import HowItWorks from './screens/HowItWorks';
 import LogIn from './screens/LogIn';
 import Mission from './screens/Mission';
@@ -29,9 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/howitworks" element={<HowItWorks />} />
-        <Route path="/customization" element={<Customization />} />
         <Route path="/mission" element={<Mission />} />
-        <Route path="/contactus" element={<ContactUs />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
