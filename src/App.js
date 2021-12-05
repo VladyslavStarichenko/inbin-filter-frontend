@@ -13,6 +13,11 @@ import Mission from './screens/Mission';
 import './App.css';
 import SignUp from './screens/SignUp';
 
+
+import useAuth from './hooks/useAuth/index';
+import { useCallback } from 'react';
+
+
 const NoMatch = () => {
   return (
     <div>
@@ -22,6 +27,8 @@ const NoMatch = () => {
 };
 
 function App() {
+  const auth = useAuth();
+
   return (
     <BrowserRouter>
       <Header />
