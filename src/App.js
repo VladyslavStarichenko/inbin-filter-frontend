@@ -5,16 +5,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WelcomePage from './screens/WelcomePage';
+import ContactUs from './screens/HowItWorks';
+import Customization from './screens/Customization';
+import HowItWorks from './screens/HowItWorks';
+import LogIn from './screens/LogIn';
+import Mission from './screens/Mission';
 
 // Styles
 import './App.css';
 
-const HowItWorks = () => <div><h1>How it works</h1></div>;
-const Customization = () => <div><h1>Customization</h1></div>;
-const Mission = () => <div><h1>Our Mission</h1></div>;
-const ContactUs = () => <div><h1>Contact Us</h1></div>;
-const LogIn = () => <div><h1>Log in</h1></div>;
-const NoMatch = () => <div><h1>No match</h1></div>;
+const NoMatch = () => {
+  return (
+    <div>
+      <h1>No match</h1>
+    </div>
+  );
+};
 
 function App() {
   return (
