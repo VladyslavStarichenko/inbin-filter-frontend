@@ -29,20 +29,26 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     marginTop: '30px',
-  }
+  },
+  errorBlock: {
+    position: 'relative',
+    top: '20px',
+    color: '#cc0000',
+  },
 }));
 
 function SignUp() {
   const auth = useAuth();
   const classes = useStyles();
   const navigate = useNavigate();
+  const [hasError, setIsHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
+    register,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -57,14 +63,7 @@ function SignUp() {
       localStorage.setItem('token', loginData.token);
       navigate('/profile');
     } catch (e) {
-      if (e.response.status === 422) {
-        Object.keys(e.response.data.errors).forEach((key) => {
-          setError(key, {
-            type: "manual",
-            message: e.response.data.errors[key],
-          });
-        });
-      }
+      setIsHasError(true);
     } finally {
       setIsLoading(false);
     }
@@ -89,11 +88,12 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    error={Boolean(errors.username?.message)}
+                    error={Boolean(errors.username)}
                     type="username"
                     label="Username"
                     fullWidth
                     variant="filled"
+                    {...register("username", { required: "Username is a required field.", minLength: 3 })}
                     helperText={errors.username?.message}
                   />
                 )}
@@ -109,12 +109,13 @@ function SignUp() {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  error={Boolean(errors.password?.message)}
+                  error={Boolean(errors.password)}
                   type="password"
                   fullWidth
                   className={classes.input}
                   label="Password"
                   variant="filled"
+                  {...register("password", { required: "Password is a required field.", minLength: 8 })}
                   helperText={errors.password?.message}
                 />
               )}
@@ -131,6 +132,11 @@ function SignUp() {
             Sign up
           </Button>
         </form>
+        <div className={classes.errorBlock}>
+          {hasError && <div>
+            Something went wrong.
+          </div>}
+        </div>
     </Container>
   );
 }
