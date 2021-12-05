@@ -1,3 +1,6 @@
+// Modules
+import { useCallback } from 'react';
+
 // Assets
 import automaticSorting from '../../assets/image/automatic-sorting.png';
 import aiBasedWaste from '../../assets/image/ai-based-waste.png';
@@ -12,8 +15,15 @@ import skyScapers from '../../assets/image/skyscapers.webp';
 
 // Styles
 import './styles.scss';
+import { useNavigate } from 'react-router';
 
 function WelcomePage() {
+  const navigate = useNavigate();
+
+  const joinUsClickHandler = useCallback(() => {
+    navigate('/signup');
+  }, [navigate]);
+
   return (
     <div className="welcome-page-wrapper">
       <div className="welcome-picture-container">
@@ -25,15 +35,15 @@ function WelcomePage() {
         />
       </div>
       <div className="find-out-more-container">
-        <h2 className="new-bine">THE NEW BIN-E</h2>
-        <p className="description-bine">THE BRAND NEW VERSION OF THE WORLDWIDE SMARTEST WASTE BIN</p>
-        <button className="description-btn">Find out more</button>
+        <h2 className="new-bine">THE NEW INBIN FILTER</h2>
+        <p className="description-bine">IF YOU ARE AN OWNER OF HOUSE COMPLEX</p>
+        <button className="description-btn" onClick={joinUsClickHandler}>JOIN US</button>
       </div>
       <div className="description-image-block">
         <div className="description-block">
-          <h2 className="smart-title">SMART <span className="important">WASTE</span> BIN</h2>
+          <h2 className="smart-title">SMART <span className="important">WASTE</span> INBIN FILTER</h2>
           <p className="smart-description">
-            BIN-E IS AN IOT DEVICE WHICH SORTS AND COMPRESSES
+            INBIN FILTER IS AN IOT DEVICE WHICH SORTS AND COMPRESSES
             THE RECYCLABLES AUTOMATICALLY. IT COMBINES UNIQUE AI-BASED
             OBJECT RECOGNITION, FILL LEVEL CONTROL AND DATA PROCESSING
             TO MAKE WASTE MANAGEMENT CONVENIENT AND EFFICIENT.

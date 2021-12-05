@@ -11,20 +11,16 @@ function Header() {
 
   const navigate = useNavigate();
 
+  const mainPage = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
   const howItWorksHandler = useCallback(() => {
     navigate('/howitworks');
   }, [navigate]);
 
-  const customizationHandler = useCallback(() => {
-    navigate('/customization');
-  }, [navigate]);
-
   const missionHandler = useCallback(() => {
     navigate('/mission');
-  }, [navigate]);
-
-  const contactUsHandler = useCallback(() => {
-    navigate('/contactus');
   }, [navigate]);
 
   const logInHandler = useCallback(() => {
@@ -34,15 +30,11 @@ function Header() {
   const buttonsData = useMemo(() => {
     return {
       'howItWorks': { label: 'how it works', handler: howItWorksHandler },
-      'customization': { label: 'customization', handler: customizationHandler },
       'mission': { label: 'mission', handler: missionHandler },
-      'contactUs': { label: 'contact us', handler: contactUsHandler },
       'logIn': { label: 'log in', handler: logInHandler },
     };
   },
     [
-      contactUsHandler,
-      customizationHandler,
       howItWorksHandler,
       logInHandler,
       missionHandler,
@@ -51,7 +43,7 @@ function Header() {
 
   return (
     <header className="header-wrapper">
-      <div className="header-wrapper__name">
+      <div className="header-wrapper__name" onClick={mainPage}>
         Inbin <span>Filter</span>
       </div>
       <div className="header-wrapper__buttons">

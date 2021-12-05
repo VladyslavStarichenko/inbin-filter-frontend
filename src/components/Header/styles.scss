@@ -27,6 +27,10 @@
     & > span {
       color: #3cb649;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__buttons {
