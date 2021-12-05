@@ -19,23 +19,4 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// axiosInstance.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   async (error) => {
-//     try {
-//       const originalRequest = error.config;
-
-//       if (error.response.status === 401 && !originalRequest._retry) {
-//         originalRequest._retry = true;
-
-//         localStorage.removeItem('token');
-//       }
-//     } catch (error) {
-//       return Promise.reject(error);
-//     }
-//   }
-// );
-
 export default axiosInstance;

@@ -10,6 +10,7 @@ import {
 import api from '../../api';
 import useAuth from '../../hooks/useAuth/useAuth';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,33 +35,36 @@ const useStyles = makeStyles((theme) => ({
 function SignUp() {
   const auth = useAuth();
   const classes = useStyles();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
 
   const onSubmit = async (data) => {
     console.log(data);
     try {
       setIsLoading(true);
-      const result = await api.auth.signup(data);
-      console.log(result);
+      await api.auth.signup(data);
       const { data: loginData } = await api.auth.login(data);
 
       auth.setToken(loginData.token);
-      auth.setUser(loginData.user);
+      auth.setUser(loginData.username);
+      localStorage.setItem('token', loginData.token);
+      navigate('/profile');
     } catch (e) {
-      // if (e.response.status === 422) {
-      //   Object.keys(e.response.data.errors).forEach((key) => {
-      //     setError(key, {
-      //       type: "manual",
-      //       message: e.response.data.errors[key],
-      //     });
-      //   });
-      // }
+      if (e.response.status === 422) {
+        Object.keys(e.response.data.errors).forEach((key) => {
+          setError(key, {
+            type: "manual",
+            message: e.response.data.errors[key],
+          });
+        });
+      }
     } finally {
       setIsLoading(false);
     }
