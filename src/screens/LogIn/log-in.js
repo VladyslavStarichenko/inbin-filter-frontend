@@ -3,9 +3,13 @@ import { Button, TextField, Container, Typography, Grid, makeStyles } from '@mat
 import { useCallback, useState } from 'react';
 import { useForm , Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import isEqual from 'lodash/isEqual';
 
 // Context
 import useAuth from '../../hooks/useAuth/useAuth';
+
+// Constants
+import { USER_ROLE } from '../../constants/users';
 
 // Api
 import api from '../../api';
@@ -55,9 +59,20 @@ function LogIn() {
       const { data: loginData } = await api.auth.login(data);
 
       auth.setToken(loginData.token);
-      auth.setUser(loginData.username);
+      auth.setUser(loginData);
       localStorage.setItem('token', loginData.token);
-      navigate('/profile');
+      localStorage.setItem('user-role', loginData.role);
+
+      if (isEqual(loginData.role, USER_ROLE['ROLE_ADMIN'])) {
+        navigate('/admin');
+      } else if (isEqual(loginData.role, USER_ROLE['ROLE_RESIDENT'])) {
+        navigate('/resident');
+      } else if (isEqual(loginData.role, USER_ROLE['ROLE_CLEANER'])) {
+        navigate('/cleaner');
+      } else {
+        console.error('User role is undefined. It is impossible.');
+      }
+
     } catch (e) {
       setIsHasError(true);
     } finally {
