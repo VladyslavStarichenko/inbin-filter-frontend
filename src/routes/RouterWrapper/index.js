@@ -1,19 +1,24 @@
 // Modules
-import { Routes, Route } from "react-router-dom";
-import useAuth from "../../hooks/useAuth/useAuth";
+import { Routes, Route } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth/useAuth';
 import {
   CircularProgress,
   makeStyles,
   Container,
   Grid,
-} from "@material-ui/core";
+} from '@material-ui/core';
+import isEqual from 'lodash/isEqual';
+import { useMemo } from 'react';
 
 // Components
-import WelcomePage from "../../screens/WelcomePage";
-import LogIn from "../../screens/LogIn";
-import Mission from "../../screens/Mission";
-import SignUp from "../../screens/SignUp";
-import HowItWorks from "../../screens/HowItWorks";
+import WelcomePage from '../../screens/WelcomePage';
+import LogIn from '../../screens/LogIn';
+import Mission from '../../screens/Mission';
+import SignUp from '../../screens/SignUp';
+import HowItWorks from '../../screens/HowItWorks';
+
+// Constants
+import { USER_ROLE } from '../../constants/users';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +26,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = () => <div><h1>Profile page of user.</h1></div>;
-const LogedMainPage = () => <div><h1>Main page of logged user</h1></div>;
+const Admin = () => <div><h1>Admin main page.</h1></div>;
+const AdminStatistics = () => <div><h1>Admin statistics page.</h1></div>;
+const AdminFlats = () => <div><h1>Admin Flats.</h1></div>;
+
+const Resident = () => <div><h1>Resident main page.</h1></div>;
+const ResidentBin = () => <div><h1>Resident bin</h1></div>;
+const ResidentStatistics = () => <div>Resident statistic.</div>;
+
+const Cleaner = () => <div><h1>Cleaner main page.</h1></div>;
+const CleanerBin = () => <div><h1>Cleaner bin.</h1></div>;
+const CleanerStatistics = () => <div><h1>Cleaner statistics.</h1></div>;
 
 function RouterWrapper() {
-  const classes = useStyles();
   const auth = useAuth();
+  const classes = useStyles();
+  const userRole = auth?.user?.role || localStorage.getItem('user-role');
+
+  const routesByUserType = useMemo(() => {
+    let routes;
+
+    if (isEqual(userRole, USER_ROLE['ROLE_ADMIN'])) {
+      routes = (
+        <>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/flats" element={<AdminFlats />} />
+          <Route path="/admin/statistics" element={<AdminStatistics />} />
+          <Route path="*" element={<Admin />} />
+        </>
+      );
+    }
+
+    if (isEqual(userRole, USER_ROLE['ROLE_RESIDENT'])) {
+      routes = (
+        <>
+          <Route path="/resident" element={<Resident />} />
+          <Route path="resident/bin" element={<ResidentBin />} />
+          <Route path="resident/statistics" element={<ResidentStatistics />} />
+        </>
+      );
+    }
+
+    if (isEqual(userRole, USER_ROLE['ROLE_CLEANER'])) {
+      routes = (
+        <>
+          <Route path="/resident" element={<Cleaner />} />
+          <Route path="resident/bin" element={<CleanerBin />} />
+          <Route path="resident/statistics" element={<CleanerStatistics />} />
+        </>
+      );
+    }
+
+    return routes;
+  }, [userRole]);
 
   return auth.isLoaded ? (
     <Routes>
@@ -41,8 +93,7 @@ function RouterWrapper() {
         </>
       ) : (
         <>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<LogedMainPage />} />
+          {routesByUserType}
         </>
       )}
     </Routes>

@@ -1,0 +1,5 @@
+export const USER_ROLE = Object.freeze({
+  'ROLE_ADMIN': 'ROLE_ADMIN',
+  'ROLE_CLEANER': 'ROLE_CLEANER',
+  'ROLE_RESIDENT': 'ROLE_RESIDENT',
+});
