@@ -62,6 +62,7 @@ function LogIn() {
       auth.setUser(loginData);
       localStorage.setItem('token', loginData.token);
       localStorage.setItem('user-role', loginData.role);
+      localStorage.setItem('username', loginData.username);
 
       if (isEqual(loginData.role, USER_ROLE['ROLE_ADMIN'])) {
         navigate('/admin');

@@ -17,6 +17,11 @@ import Mission from '../../screens/Mission';
 import SignUp from '../../screens/SignUp';
 import HowItWorks from '../../screens/HowItWorks';
 
+import AddNewResident from '../../screens/Authenticated/Admin/Pages/AddNewResidentPage/add-new-resident';
+import AdminMainPage from '../../screens/Authenticated/Admin/MainPage';
+import GetAllBinsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllBinsByFlat';
+import GetAllResidentsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllResidentsByFlat';
+
 // Constants
 import { USER_ROLE } from '../../constants/users';
 
@@ -49,8 +54,11 @@ function RouterWrapper() {
     if (isEqual(userRole, USER_ROLE['ROLE_ADMIN'])) {
       routes = (
         <>
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<AdminMainPage />} />
           <Route path="/admin/flats" element={<AdminFlats />} />
+          <Route path="/admin/addnewresident" element={<AddNewResident />} />
+          <Route path="/admin/getallbins" element={<GetAllBinsByFlat />} />
+          <Route path="/admin/getallresidents" element={<GetAllResidentsByFlat />} />
           <Route path="/admin/statistics" element={<AdminStatistics />} />
           <Route path="*" element={<Admin />} />
         </>
@@ -61,8 +69,8 @@ function RouterWrapper() {
       routes = (
         <>
           <Route path="/resident" element={<Resident />} />
-          <Route path="resident/bin" element={<ResidentBin />} />
-          <Route path="resident/statistics" element={<ResidentStatistics />} />
+          <Route path="/resident/bin" element={<ResidentBin />} />
+          <Route path="/resident/statistics" element={<ResidentStatistics />} />
         </>
       );
     }
@@ -70,9 +78,9 @@ function RouterWrapper() {
     if (isEqual(userRole, USER_ROLE['ROLE_CLEANER'])) {
       routes = (
         <>
-          <Route path="/resident" element={<Cleaner />} />
-          <Route path="resident/bin" element={<CleanerBin />} />
-          <Route path="resident/statistics" element={<CleanerStatistics />} />
+          <Route path="/cleaner" element={<Cleaner />} />
+          <Route path="/cleaner/bin" element={<CleanerBin />} />
+          <Route path="/cleaner/statistics" element={<CleanerStatistics />} />
         </>
       );
     }
@@ -82,7 +90,7 @@ function RouterWrapper() {
 
   return auth.isLoaded ? (
     <Routes>
-      {!(localStorage.getItem('token') || auth.token) ? (
+      {!(localStorage.getItem('token') || auth.token || localStorage.getItem('user-role')) ? (
         <>
           <Route exact path="/" element={<WelcomePage />} />
           <Route path="/login" element={<LogIn />} />

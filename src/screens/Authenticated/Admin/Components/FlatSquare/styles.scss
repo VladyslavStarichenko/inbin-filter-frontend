@@ -1,0 +1,36 @@
+.flat-square-container {
+  height: 260px;
+  width: 200px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  background-color: rgb(235, 233, 233);
+
+  margin-left: 30px;
+  margin-right: 30px;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  .flat-image {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  .control-btn {
+    height: 30px;
+    width: 180px;
+    margin: {
+      top: 10px;
+      left: auto;
+      right: auto;
+    }
+    font-size: 9px;
+  }
+
+  .address-block {
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+    bottom: 4px;
+  }
+}

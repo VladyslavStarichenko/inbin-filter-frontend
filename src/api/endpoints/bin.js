@@ -1,5 +1,5 @@
 // Modules
-import axios from 'axios';
+import axios from '../axios';
 
 const endpoints = Object.freeze({
   deleteBinById: (binId) => axios.delete(`/bin/${binId}`),
