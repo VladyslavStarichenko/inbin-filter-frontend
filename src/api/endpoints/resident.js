@@ -1,5 +1,5 @@
 // Modules
-import axios from 'axios';
+import axios from '../axios';
 
 const houseComplex = '/house-complex/flat/residents';
 

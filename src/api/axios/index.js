@@ -11,7 +11,7 @@ axiosInstance.interceptors.request.use(
     const authToken = Cookies.get("auth-token");
 
     if (authToken || localStorage.getItem('token')) {
-      config.headers.authorization = `Bearer ${authToken}`;
+      config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
     }
 
     return config;

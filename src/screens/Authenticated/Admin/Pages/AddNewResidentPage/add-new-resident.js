@@ -1,36 +1,32 @@
 // Modules
-import isEqual from 'lodash/isEqual';
-import { useForm, Controller } from 'react-hook-form';
-import {
-  TextField,
-  Grid,
-  makeStyles,
-  Container,
-  Button,
-  Typography,
-} from '@material-ui/core';
-import api from '../../api';
-import useAuth from '../../hooks/useAuth/useAuth';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button, TextField, Container, Typography, Grid, makeStyles } from '@material-ui/core';
+import { useCallback, useState } from 'react';
+import { useForm , Controller } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 
-// Constants
-import { USER_ROLE } from '../../constants/users';
+// Styles
+import './styles.scss';
+
+// Hooks
+import useAdminContext from '../../../../../hooks/useAdmin/useAdminContext';
+
+// Api
+import api from '../../../../../api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     marginTop: '100px',
   },
-  buttonSpacing: {
-    marginLeft: '100px',
-    marginTop: '30px',
-  },
-  loginBtn: {
-    marginTop: '30px',
-    marginRight: '40px',
+  goBackToMain: {
+    marginTop: '20px',
     width: '100%',
-    height: '60px',
+    height: '50px',
+  },
+  createBtn: {
+    marginTop: '30px',
+    height: '50px',
+    width: '100%',
   },
   input: {
     marginTop: '30px',
@@ -42,11 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp() {
-  const auth = useAuth();
+function AddNewResident() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [hasError, setIsHasError] = useState(false);
+  const { flatId } = useAdminContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -56,48 +51,34 @@ function SignUp() {
     register,
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const requiredRules= { required: true };
+
+  const onSubmit = useCallback(async (data) => {
     try {
+      console.log(data);
       setIsLoading(true);
-      await api.auth.signup(data);
-      const { data: loginData } = await api.auth.login(data);
-
-      auth.setToken(loginData.token);
-      auth.setUser(loginData);
-      localStorage.setItem('token', loginData.token);
-      localStorage.setItem('user-role', loginData.role);
-      localStorage.setItem('username', loginData.username);
-
-      if (isEqual(loginData.role, USER_ROLE['ROLE_ADMIN'])) {
-        navigate('/admin');
-      } else if (isEqual(loginData.role, USER_ROLE['ROLE_RESIDENT'])) {
-        navigate('/resident');
-      } else if (isEqual(loginData.role, USER_ROLE['ROLE_CLEANER'])) {
-        navigate('/cleaner');
-      } else {
-        console.error('User role is undefined. It is impossible.');
-      }
-
-    } catch (e) {
-      setIsHasError(true);
+      const response = await api.auth.registerResident(flatId, data);
+      console.log(response);
+      navigate('/admin');
+    } catch (error) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [navigate, flatId]);
 
   return (
     <Container maxWidth="xs" className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h6">
-            Sign up
+            Add New Resident
           </Typography>
         </Grid>
       </Grid>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={12} className="what">
               <Controller
                 name="username"
                 control={control}
@@ -114,6 +95,7 @@ function SignUp() {
                     helperText={errors.username?.message}
                   />
                 )}
+                rules={requiredRules}
               />
             </Grid>
           </Grid>
@@ -132,10 +114,11 @@ function SignUp() {
                   className={classes.input}
                   label="Password"
                   variant="filled"
-                  {...register("password", { required: "Password is a required field.", minLength: 8 })}
+                  {...register("password", { required: "Password is a required field.", minLength: 7 })}
                   helperText={errors.password?.message}
                 />
               )}
+              rules={requiredRules}
             />
           </Grid>
 
@@ -143,19 +126,24 @@ function SignUp() {
             variant="contained"
             color="primary"
             type="submit"
-            className={classes.loginBtn}
+            className={classes.createBtn}
             disabled={isLoading}
           >
-            Sign up
+            Register new resident
+          </Button>
+          <Button
+            className={classes.goBackToMain}
+            variant="contained"
+            color="secondary"
+            type="submit"
+            component={Link}
+            to="/admin"
+          >
+            Go back to main
           </Button>
         </form>
-        <div className={classes.errorBlock}>
-          {hasError && <div>
-            Something went wrong.
-          </div>}
-        </div>
     </Container>
   );
 }
 
-export default SignUp;
+export default AddNewResident;
