@@ -20,12 +20,18 @@ import './styles.scss';
 import api from '../../../../api';
 
 function MainPage() {
-  const { houseComplex, setHouseComplex, hasUserFlats, setHasUserFlats, hasUserComplex, setHasUserComplex } = useAdminContext();
+  const {
+    addNewFlat,
+    setAddNewFlat,
+    houseComplex,
+    setHouseComplex,
+    hasUserFlats,
+    setHasUserFlats,
+    hasUserComplex,
+    setHasUserComplex,
+  } = useAdminContext();
+
   const [isLoading, setIsLoading] = useState(false);
-  // const [houseComplex, setHouseComplex]= useState({});
-  // const [hasUserFlats, setHasUserFlats] = useState(false);
-  // const [hasUserComplex, setHasUserComplex] = useState(true);
-  const [addNewFlat, setAddNewFlat] = useState(false);
 
   const userName = localStorage.getItem('username');
 
@@ -69,7 +75,7 @@ function MainPage() {
   } else {
     let contentForFlats;
 
-    if (!hasUserFlats) {
+    if (!hasUserFlats || addNewFlat) {
       contentForFlats = (
         <div>
           <h2 className="welcome-text">

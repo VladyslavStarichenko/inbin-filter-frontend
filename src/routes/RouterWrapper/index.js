@@ -21,6 +21,7 @@ import AddNewResident from '../../screens/Authenticated/Admin/Pages/AddNewReside
 import AdminMainPage from '../../screens/Authenticated/Admin/MainPage';
 import GetAllBinsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllBinsByFlat';
 import GetAllResidentsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllResidentsByFlat';
+import GetWastesByResident from '../../screens/Authenticated/Admin/Pages/GetWastesByResident';
 
 // Constants
 import { USER_ROLE } from '../../constants/users';
@@ -59,6 +60,7 @@ function RouterWrapper() {
           <Route path="/admin/addnewresident" element={<AddNewResident />} />
           <Route path="/admin/getallbins" element={<GetAllBinsByFlat />} />
           <Route path="/admin/getallresidents" element={<GetAllResidentsByFlat />} />
+          <Route path="/admin/getallresidents/getwastesbyres" element={<GetWastesByResident />} />
           <Route path="/admin/statistics" element={<AdminStatistics />} />
           <Route path="*" element={<Admin />} />
         </>

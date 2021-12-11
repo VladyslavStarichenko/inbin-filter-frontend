@@ -15,20 +15,28 @@ import useAdminContext from '../../../../../hooks/useAdmin/useAdminContext';
 import residentImage from '../../../../../assets/image/resident.jpg';
 
 function ResidentSquare(props) {
-  const { address, id, name } = props;
   const navigate = useNavigate();
-  const { setFlatId } = useAdminContext();
+  const { address, id, name } = props;
+  const { setResidentId } = useAdminContext();
 
-  const getAllResidentsByFlat = useCallback(() => {
-    setFlatId(id);
-    navigate('/admin/getallresidents');
-  }, [navigate, setFlatId, id]);
+  const getAllWastesByResident = useCallback(() => {
+    setResidentId(id);
+    navigate('/admin/getallresidents/getwastesbyres');
+  }, [navigate, setResidentId, id]);
 
   return (
     <div className="resident-square-container">
       <img src={residentImage} className="resident-image" alt="Flat" />
       <div className="resident-address-block">Name: {name}</div>
       <div className="resident-address-block">Address: {address}</div>
+      <Button
+        className="get-all-waste"
+        variant="contained"
+        color="primary"
+        onClick={getAllWastesByResident}
+      >
+        Get all wastes
+      </Button>
     </div>
   );
 }

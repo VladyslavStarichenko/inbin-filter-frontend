@@ -2,6 +2,7 @@
 import { useState, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Container, Grid, makeStyles } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 // Styles
 import './styles.scss';
@@ -44,6 +45,13 @@ function CreateNewFlat() {
     register,
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const onBackHandler = useCallback(() => {
+    setAddNewFlat(false);
+    navigate('/admin');
+  }, [navigate, setAddNewFlat]);
+
   const requiredRules= { required: true };
 
   const onSubmit = useCallback(async (data) => {
@@ -52,7 +60,7 @@ function CreateNewFlat() {
       await api.flat.addNewFlat(data);
       const { data: houseComplex } = await api.houseComplex.getHouseComplex();
       setHasUserFlats(true);
-      setAddNewFlat(true);
+      setAddNewFlat(false);
       setHouseComplex(houseComplex);
     } catch (error) {
       console.log('Error, ', error.message);
@@ -95,6 +103,15 @@ function CreateNewFlat() {
           disabled={isLoading}
         >
           Add new flat
+        </Button>
+
+        <Button
+          onClick={onBackHandler}
+          className="back-btn-flat-page"
+          variant="contained"
+          color="secondary"
+        >
+          ← Back
         </Button>
       </form>
     </Container>

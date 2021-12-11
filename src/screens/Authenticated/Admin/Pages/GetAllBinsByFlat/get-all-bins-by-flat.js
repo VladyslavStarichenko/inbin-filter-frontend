@@ -1,8 +1,13 @@
 // Modules
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { CircularProgress, Button } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 import { isEqual, size } from 'lodash';
-import { CircularProgress } from '@material-ui/core';
-import { Alert, AlertTitle } from '@mui/material';
+
+// Components
+import BinSquare from '../../Components/BinSquare';
+import ErrorMessage from '../../Components/ErrorMessage';
+import WarningMessage from '../../Components/WarningMessage';
 
 // Styles
 import './styles.scss';
@@ -18,6 +23,12 @@ function GetAllBinsByFlat() {
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [binsByFlat, setBinsByFlat] = useState([]);
+
+  const navigate = useNavigate();
+
+  const onBackHandler = useCallback(() => {
+    navigate('/admin');
+  }, [navigate]);
 
   useEffect(() => {
     async function getAllBinsByFlat() {
@@ -41,44 +52,46 @@ function GetAllBinsByFlat() {
 
   if (isLoading) {
     contentOfPage = (
-      <div className="loading-container">
-        <CircularProgress color="success" />
-      </div>
+      <CircularProgress color="success" />
     );
   }
 
   if (!isEqual(error, {})) {
-    contentOfPage = (
-      <div className="error-block">
-        <Alert severity="error">
-        <AlertTitle>Error</AlertTitle>
-          This is an error alert — <strong>check it out!</strong>
-        </Alert>
-      </div>
-    );
+    contentOfPage = <ErrorMessage />;
   }
 
   if (isEqual(size(binsByFlat), 0)) {
-    contentOfPage = (
-      <div className="no-bins-container">
-        There are no bins in chosen flat.
-      </div>
-    );
+    contentOfPage = <WarningMessage firstPart="There are no bins " secondPart="for this flat!"/>;
   } else {
     contentOfPage = (
-      <React.Fragment>
-        <h2>All bins</h2>
+      <div className="bins-wrapper">
+        <h2 className="bins-header">All bins by chosen flat</h2>
         <div className="container-for-bins">
-          {binsByFlat.map((bin) => {
-            return <div key={bin.id}>JSON.stringify(bin)</div>;
-          })}
+          {binsByFlat.map((bin) => (
+            <BinSquare
+              key={bin.id}
+              address={bin.address}
+              capacity={bin.capacity}
+              fill={bin.fill}
+              full={bin.full}
+              litterType={bin.litterType}
+            />
+          ))}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 
   return (
     <div className="get-all-bins-container">
+      <Button
+        onClick={onBackHandler}
+        className="back-btn"
+        variant="contained"
+        color="primary"
+      >
+        ← Back
+      </Button>
       {contentOfPage}
     </div>
   );

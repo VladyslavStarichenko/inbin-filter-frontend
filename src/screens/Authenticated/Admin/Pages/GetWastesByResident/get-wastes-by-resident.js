@@ -3,28 +3,29 @@ import { useCallback, useEffect, useState } from 'react';
 import { CircularProgress, Button } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { isEqual, size } from 'lodash';
-import React from 'react';
 import cx from 'classnames';
 
 // Components
 import ErrorMessage from '../../Components/ErrorMessage';
-import ResidentSquare from '../../Components/ResidentSquare';
 import WarningMessage from '../../Components/WarningMessage';
+import WasteSquare from '../../Components/WasteSquare';
 
 // Styles
 import './styles.scss';
 
-// Api
-import api from '../../../../../api';
+// Hooks
 import useAdminContext from '../../../../../hooks/useAdmin/useAdminContext';
 
-function GetAllResidentsByFlat() {
-  const { flatId } = useAdminContext();
+// Api
+import api from '../../../../../api';
+
+function GetWastesByResident() {
+  const [wastes, setWastes] = useState();
+  const { residentId } = useAdminContext();
   const [error, setError] = useState(null);
   const [numPage, setNumPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [residentsByFlat, setResidentsByFlat] = useState([]);
 
   const navigate = useNavigate();
 
@@ -37,60 +38,60 @@ function GetAllResidentsByFlat() {
   }, []);
 
   const onBackHandler = useCallback(() => {
-    navigate('/admin');
+    navigate('/admin/getallresidents');
   }, [navigate]);
 
   useEffect(() => {
-    async function getAllResidentsByFlat() {
-      const request = { id: flatId, pageNumber: numPage, pageSize: 3};
-      const response = await api.resident.getAllFlatResidents(request);
-      const residents = await response.data;
+    async function getAllWastesByResidentPaginated() {
+      const request = { residentId, pageNumber: numPage, pageSize: 3};
+      const { data: wastes } = await api.waste.getAllWastesByResidentPaginated(request);
+      const wastesArr = await wastes.wasteGetDtos;
 
-      if (!isEqual(numPage, 0) && isEqual(size(residents.residentGetDtoList), 0)) {
+      if (!isEqual(numPage, 0) && isEqual(size(wastesArr), 0)) {
         setNumPage((prev) => prev - 1);
       } else {
-        setResidentsByFlat(residents);
-        setTotalPages(residents.totalPages - 1);
+        setWastes(wastesArr);
+        setTotalPages(wastes.totalPages - 1);
       }
     }
 
     try {
       setIsLoading(true);
-      getAllResidentsByFlat();
+      getAllWastesByResidentPaginated();
     } catch (error) {
       console.log(error.message);
       setError(error);
     } finally {
       setIsLoading(false);
     }
-  }, [flatId, numPage]);
+  }, [residentId, numPage]);
 
   let contentOfPage;
 
   if (isLoading) {
-    contentOfPage = (
-      <CircularProgress color="success" />
-    );
+    return <CircularProgress color="success" />
   }
 
   if (!isEqual(error, null)) {
     contentOfPage = <ErrorMessage />;
   }
 
-  if (isEqual(size(residentsByFlat.residentGetDtoList), 0)) {
-    contentOfPage = <WarningMessage firstPart="There are no residents " secondPart="in this flat!"/>;
+  if (isEqual(size(wastes), 0)) {
+    contentOfPage = <WarningMessage firstPart="There are no wastes " secondPart="for this resident!"/>;
   } else {
     contentOfPage = (
-      <div className="residents-wrapper">
-        <h2 className="resident-header">All residents by chosen flat</h2>
-        <div className="container-for-residents">
-          {residentsByFlat.residentGetDtoList.map((resident) => {
+      <div className="wastes-wrapper">
+        <h2 className="wastes-header">All wastes by chosen resident</h2>
+        <div className="container-for-wastes">
+          {wastes.map((waste) => {
+            console.log(waste);
             return (
-              <ResidentSquare
-                address={resident.address}
-                key={resident.id}
-                name={resident.name}
-                id={resident.id}
+              <WasteSquare
+                key={waste.id}
+                id={waste.id}
+                amount={waste.amount}
+                litterType={waste.litterType}
+                priceToPay={waste.priceToPay}
               />
             );
           })}
@@ -131,7 +132,7 @@ function GetAllResidentsByFlat() {
   }
 
   return (
-    <div className="get-all-residents-container">
+    <div className="get-wastes-resident-container">
       <Button
         onClick={onBackHandler}
         className="back-btn"
@@ -145,4 +146,4 @@ function GetAllResidentsByFlat() {
   );
 }
 
-export default GetAllResidentsByFlat;
+export default GetWastesByResident;
