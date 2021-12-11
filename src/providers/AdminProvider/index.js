@@ -7,13 +7,19 @@ function AdminContextProdiver(props) {
   const { children } = props;
 
   const [flatId, setFlatId] = useState();
+  const [residentId, setResidentId] = useState();
   const [houseComplex, setHouseComplex]= useState({});
+  const [addNewFlat, setAddNewFlat] = useState(false);
   const [hasUserFlats, setHasUserFlats] = useState(false);
   const [hasUserComplex, setHasUserComplex] = useState(true);
 
   const contextValue = {
+    addNewFlat,
+    setAddNewFlat,
     flatId,
     setFlatId,
+    residentId,
+    setResidentId,
     houseComplex,
     setHouseComplex,
     hasUserFlats,

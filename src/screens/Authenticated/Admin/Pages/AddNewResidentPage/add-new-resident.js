@@ -55,7 +55,6 @@ function AddNewResident() {
 
   const onSubmit = useCallback(async (data) => {
     try {
-      console.log(data);
       setIsLoading(true);
       const response = await api.auth.registerResident(flatId, data);
       console.log(response);

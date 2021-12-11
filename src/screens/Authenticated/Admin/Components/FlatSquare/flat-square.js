@@ -60,7 +60,7 @@ function FlatSquare(props) {
       >
         Add new resident
       </Button>
-      <div className="address-block">{address}</div>
+      <div className="address-block">Address: {address}</div>
     </div>
   );
 }
