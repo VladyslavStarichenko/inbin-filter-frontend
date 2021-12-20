@@ -1,0 +1,55 @@
+.resident-statistics {
+  height: 600px;
+
+  &__header {
+    font-size: 25px;
+    font-weight: 400;
+    color: #161616;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 5px;
+  }
+
+  &__doughnut {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    & > canvas {
+      height: 400px !important;
+      width: 400px !important;
+    }
+
+    & > canvas + div {
+      width: 300px;
+      margin-left: 20px;
+    }
+
+    .doughnut-container {
+      height: 300px;
+    }
+  }
+}
+
+.statistics-loading {
+  width: 100px;
+  height: 100px;
+  margin-top: 40px;
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
+
+.statistics-error {
+  width: 600px;
+  height: 100px;
+  margin-top: 40px;
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}

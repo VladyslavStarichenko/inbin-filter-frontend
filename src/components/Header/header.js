@@ -45,12 +45,20 @@ function Header() {
     navigate('/admin');
   }, [navigate]);
 
+  const getMyProfile = useCallback(() => {
+    navigate('/resident');
+  }, []);
+
+  const checkMyWasteResident = useCallback(() => {
+    navigate('/resident/waste');
+  }, [navigate]);
+
   const checkMyBinResident = useCallback(() => {
-    navigate('/bin');
+    navigate('/resident/bin');
   }, [navigate]);
 
   const getMyStatisticsResident = useCallback(() => {
-    navigate('/statistics');
+    navigate('/resident/statistics');
   }, [navigate]);
 
   const getFlatsCleaner = useCallback(() => {
@@ -86,7 +94,9 @@ function Header() {
     if (isEqual(userRole, USER_ROLE['ROLE_RESIDENT']) ||
     isEqual(localStorage.getItem('user-role'), USER_ROLE['ROLE_RESIDENT'])) {
       btnsByUserRole = {
-        checkMyBin: { label: 'Check my bin', handler: checkMyBinResident },
+        getMyProfile: { label: 'My profile', handler: getMyProfile },
+        checkMyWaste: { label: 'My waste', handler: checkMyWasteResident },
+        checkMyBin: { label: 'My bins', handler: checkMyBinResident },
         getMyStatistics: { label: 'Get my statistics', handler: getMyStatisticsResident },
       };
     }
@@ -110,8 +120,10 @@ function Header() {
       auth?.user?.role,
       logOutHandler,
       checkMyBinResident,
+      checkMyWasteResident,
       getFlatsAdmin,
       getFlatsCleaner,
+      getMyProfile,
       getMyStatisticsResident,
       getStatisticsAdmin,
     ],
