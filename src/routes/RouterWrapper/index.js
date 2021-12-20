@@ -22,6 +22,10 @@ import AdminMainPage from '../../screens/Authenticated/Admin/MainPage';
 import GetAllBinsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllBinsByFlat';
 import GetAllResidentsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllResidentsByFlat';
 import GetWastesByResident from '../../screens/Authenticated/Admin/Pages/GetWastesByResident';
+import StatisticsPage from '../../screens/Authenticated/Admin/Pages/StatisticsPage';
+import GetAllFlatDebtors from '../../screens/Authenticated/Admin/Pages/GetAllFlatDebtors';
+import GetAllWastesStatisticByResident from '../../screens/Authenticated/Admin/Pages/GetAllWastesStatisticByResident';
+import GetWasteStatisticByFlat from '../../screens/Authenticated/Admin/Pages/GetWasteStatisticByFlat';
 
 // Constants
 import { USER_ROLE } from '../../constants/users';
@@ -33,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Admin = () => <div><h1>Admin main page.</h1></div>;
-const AdminStatistics = () => <div><h1>Admin statistics page.</h1></div>;
 const AdminFlats = () => <div><h1>Admin Flats.</h1></div>;
 
 const Resident = () => <div><h1>Resident main page.</h1></div>;
@@ -52,7 +55,7 @@ function RouterWrapper() {
   const routesByUserType = useMemo(() => {
     let routes;
 
-    if (isEqual(userRole, USER_ROLE['ROLE_ADMIN'])) {
+    if (isEqual(userRole, USER_ROLE['ROLE_COMPLEX_ADMIN'])) {
       routes = (
         <>
           <Route path="/admin" element={<AdminMainPage />} />
@@ -61,7 +64,10 @@ function RouterWrapper() {
           <Route path="/admin/getallbins" element={<GetAllBinsByFlat />} />
           <Route path="/admin/getallresidents" element={<GetAllResidentsByFlat />} />
           <Route path="/admin/getallresidents/getwastesbyres" element={<GetWastesByResident />} />
-          <Route path="/admin/statistics" element={<AdminStatistics />} />
+          <Route path="/admin/statistics" element={<StatisticsPage />} />
+          <Route path="/admin/statistics/get-waste-statistic-by-flat" element={<GetWasteStatisticByFlat />} />
+          <Route path="/admin/statistics/get-all-wastes-statistic-by-resident" element={<GetAllWastesStatisticByResident />} />
+          <Route path="/admin/statistics/get-all-flat-debtors" element={<GetAllFlatDebtors />} />
           <Route path="*" element={<Admin />} />
         </>
       );

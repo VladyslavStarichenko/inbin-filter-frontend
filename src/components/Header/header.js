@@ -42,7 +42,7 @@ function Header() {
   }, [navigate]);
 
   const getFlatsAdmin = useCallback(() => {
-    navigate('/admin/flats');
+    navigate('/admin');
   }, [navigate]);
 
   const checkMyBinResident = useCallback(() => {
@@ -73,10 +73,10 @@ function Header() {
 
   const loggedInBtns = useMemo(() => {
     const userRole = auth?.user?.role || localStorage.getItem('user-role');
-    let btnsByUserRole;
+    let btnsByUserRole = {};
 
-    if (isEqual(userRole, USER_ROLE['ROLE_ADMIN']) ||
-    isEqual(localStorage.getItem('user-role'), USER_ROLE['ROLE_ADMIN'])) {
+    if (isEqual(userRole, USER_ROLE['ROLE_COMPLEX_ADMIN']) ||
+    isEqual(localStorage.getItem('user-role'), USER_ROLE['ROLE_COMPLEX_ADMIN'])) {
       btnsByUserRole = {
         statistics: { label: 'Statistics', handler: getStatisticsAdmin },
         flats: { label: 'Flats', handler: getFlatsAdmin },

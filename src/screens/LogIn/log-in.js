@@ -64,7 +64,7 @@ function LogIn() {
       localStorage.setItem('user-role', loginData.role);
       localStorage.setItem('username', loginData.username);
 
-      if (isEqual(loginData.role, USER_ROLE['ROLE_ADMIN'])) {
+      if (isEqual(loginData.role, USER_ROLE['ROLE_COMPLEX_ADMIN'])) {
         navigate('/admin');
       } else if (isEqual(loginData.role, USER_ROLE['ROLE_RESIDENT'])) {
         navigate('/resident');

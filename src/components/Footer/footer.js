@@ -1,11 +1,14 @@
 // Modules
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { isEqual } from 'lodash';
 
 // Styles
 import './styles.scss';
 
 function Footer() {
+  const { pathname } = useLocation();
+
   const menuOptions = useMemo(() => {
       return {
         'howitworks': { path: '/howitworks', label: 'How It Works' },
@@ -14,6 +17,8 @@ function Footer() {
         'contact': { path: '/contactus', label: 'Contact' },
       };
   }, []);
+
+  if (isEqual(pathname, '/')) return null;
 
   return (
     <footer className="footer-wrapper">
