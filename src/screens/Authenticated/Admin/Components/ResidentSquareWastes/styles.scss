@@ -1,0 +1,34 @@
+.resident-wastes-square-container {
+  position: relative;
+  height: 230px;
+  width: 160px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  background-color: rgb(235, 233, 233);
+
+  margin-left: 21px;
+  margin-right: 15px;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  .resident-wastes-image {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  .resident-wastes-address-block {
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+    bottom: 4px;
+  }
+
+  .get-all-wastes-resident {
+    width: 150px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 4px;
+    left: 5px;
+  }
+}

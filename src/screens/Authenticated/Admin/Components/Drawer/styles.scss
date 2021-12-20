@@ -1,0 +1,17 @@
+.drawer-container {
+  width: 300px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+
+  .btn-drawer {
+    height: 40px;
+    font-size: 10px;
+    margin-top: 10px;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+

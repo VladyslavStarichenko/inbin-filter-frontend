@@ -1,0 +1,97 @@
+.get-all-flat-debtors {
+  height: 400px;
+  margin-top: 20px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  & > div:first-child {
+    margin-right: 30px;
+  }
+
+  .debtors-header {
+    font-size: 25px;
+    font-weight: 400;
+    color: #3cb649;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 16px;
+    text-align: center;
+  }
+
+  .get-all-debtors-container {
+    width: 640px;
+    height: 360px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    .controls-container {
+      top: 20px;
+      width: 640px;
+      text-align: center;
+      position: relative;
+      background-color: #3cb649;
+
+      .nonext {
+        display: none;
+      }
+
+      .prev-btn {
+        height: 40px;
+        margin-left: 20px;
+      }
+
+      .next-btn {
+        height: 40px;
+        width: 152px;
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.loading-debtors {
+  height: 150px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    width: 500px;
+  }
+}
+
+.error-debtors {
+  height: 150px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    width: 500px;
+  }
+}
+
+.no-debtors {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    width: 100%;
+    height: 96.5%;
+  }
+}
