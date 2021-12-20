@@ -1,0 +1,84 @@
+.resident-my-waste-container {
+  width: 700px;
+  height: 400px;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+
+  border-radius: 8px;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+
+  .my-wastes-wrapper {
+
+    .my-wastes-header {
+      font-size: 25px;
+      font-weight: 400;
+      color: #3cb649;
+      text-align: center;
+      margin-bottom: 5px;
+      margin-top: 20px;
+      position: relative;
+      top: 5px;
+    }
+
+    .container-for-my-wastes {
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+
+    .my-controls-container {
+      text-align: center;
+
+      .nonext {
+        display: none;
+      }
+
+      .prev-btn {
+        height: 40px;
+        margin-left: 20px;
+      }
+
+      .next-btn {
+        height: 40px;
+        width: 152px;
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.resident-waste-error {
+  width: 800px;
+  margin-top: 20px;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
+
+.resident-waste-loading {
+  width: 800px;
+  margin-top: 40px;
+
+  text-align: center;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
+
+.resident-waste-warning {
+  width: 800px;
+  margin-top: 40px;
+
+  text-align: center;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}

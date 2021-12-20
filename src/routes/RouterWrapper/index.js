@@ -17,6 +17,8 @@ import Mission from '../../screens/Mission';
 import SignUp from '../../screens/SignUp';
 import HowItWorks from '../../screens/HowItWorks';
 
+
+// Admin pages
 import AddNewResident from '../../screens/Authenticated/Admin/Pages/AddNewResidentPage/add-new-resident';
 import AdminMainPage from '../../screens/Authenticated/Admin/MainPage';
 import GetAllBinsByFlat from '../../screens/Authenticated/Admin/Pages/GetAllBinsByFlat';
@@ -27,6 +29,12 @@ import GetAllFlatDebtors from '../../screens/Authenticated/Admin/Pages/GetAllFla
 import GetAllWastesStatisticByResident from '../../screens/Authenticated/Admin/Pages/GetAllWastesStatisticByResident';
 import GetWasteStatisticByFlat from '../../screens/Authenticated/Admin/Pages/GetWasteStatisticByFlat';
 
+// Resident pages
+import Profile from '../../screens/Authenticated/Resident/Pages/Profile';
+import ResidentStatistics from '../../screens/Authenticated/Resident/Pages/Statistics';
+import ResidentWaste from '../../screens/Authenticated/Resident/Pages/MyWaste/my-waste';
+import ResidentBin from '../../screens/Authenticated/Resident/Pages/MyBins/my-bins';
+
 // Constants
 import { USER_ROLE } from '../../constants/users';
 
@@ -36,12 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Admin = () => <div><h1>Admin main page.</h1></div>;
-const AdminFlats = () => <div><h1>Admin Flats.</h1></div>;
+const NotFound = () => <div>
+  Page not found.
+</div>;
 
-const Resident = () => <div><h1>Resident main page.</h1></div>;
-const ResidentBin = () => <div><h1>Resident bin</h1></div>;
-const ResidentStatistics = () => <div>Resident statistic.</div>;
+const AdminFlats = () => <div><h1>Admin Flats.</h1></div>;
 
 const Cleaner = () => <div><h1>Cleaner main page.</h1></div>;
 const CleanerBin = () => <div><h1>Cleaner bin.</h1></div>;
@@ -68,7 +75,7 @@ function RouterWrapper() {
           <Route path="/admin/statistics/get-waste-statistic-by-flat" element={<GetWasteStatisticByFlat />} />
           <Route path="/admin/statistics/get-all-wastes-statistic-by-resident" element={<GetAllWastesStatisticByResident />} />
           <Route path="/admin/statistics/get-all-flat-debtors" element={<GetAllFlatDebtors />} />
-          <Route path="*" element={<Admin />} />
+          <Route path="*" element={<NotFound />} />
         </>
       );
     }
@@ -76,8 +83,9 @@ function RouterWrapper() {
     if (isEqual(userRole, USER_ROLE['ROLE_RESIDENT'])) {
       routes = (
         <>
-          <Route path="/resident" element={<Resident />} />
+          <Route path="/resident" element={<Profile />} />
           <Route path="/resident/bin" element={<ResidentBin />} />
+          <Route path="/resident/waste" element={<ResidentWaste />} />
           <Route path="/resident/statistics" element={<ResidentStatistics />} />
         </>
       );

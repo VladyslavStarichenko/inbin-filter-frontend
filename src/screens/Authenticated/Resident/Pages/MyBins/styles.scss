@@ -1,0 +1,76 @@
+.get-all-my-bins-container {
+  width: 600px;
+  margin-top: 20px;
+  position: relative;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  .my-bins-wrapper {
+    height: 400px;
+    width: 2000px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    overflow-y: scroll;
+
+    .my-bins-header {
+      font-size: 25px;
+      font-weight: 400;
+      color: #3cb649;
+      text-align: center;
+      margin-bottom: 5px;
+      margin-top: 20px;
+      position: relative;
+      top: 15px;
+    }
+
+    .container-for-my-bins {
+      height: 300px;
+      min-width: 800px;
+      max-width: 2000px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.resident-bins-error {
+  width: 800px;
+  margin-top: 20px;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
+
+.resident-bins-loading {
+  width: 800px;
+  margin-top: 40px;
+
+  text-align: center;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
+
+.resident-bins-warning {
+  width: 800px;
+  margin-top: 40px;
+
+  text-align: center;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+}
