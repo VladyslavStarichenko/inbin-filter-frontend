@@ -1,5 +1,9 @@
 // Modules
 import { memo } from 'react';
+import { isEqual } from 'lodash';
+
+// Context
+import useResidentContext from '../../../../../hooks/useResident/useResidentContext';
 
 // Styles
 import './styles.scss';
@@ -7,10 +11,17 @@ import './styles.scss';
 // Assets
 import residentProfile from '../../../../../assets/image/residentProfile.jpeg';
 
+
 function ProfileSquare(props) {
   const { profileData } = props;
 
   const { address, bill, name } = profileData;
+
+  const { setHasDebt } = useResidentContext();
+
+  const residentBillMoreZero = !isEqual(bill, 0);
+
+  setHasDebt(residentBillMoreZero);
 
   return (
     <div className="profile-square-container">

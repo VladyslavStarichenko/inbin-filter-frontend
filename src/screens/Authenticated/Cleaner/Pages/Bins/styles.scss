@@ -1,4 +1,4 @@
-.get-all-my-bins-container {
+.get-all-cleaner-bins-container {
   width: 600px;
   margin-top: 20px;
   position: relative;
@@ -6,19 +6,20 @@
   margin: {
     left: auto;
     right: auto;
-  };
+  }
 
-  display: flex;
-  flex-flow: row nowrap;
+  .back-btn {
+    position: absolute;
+    left: -100px;
+  }
 
-  .my-bins-wrapper {
+  .cleaner-bins-wrapper {
     height: 400px;
-    width: 2000px;
     border-radius: 8px;
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     overflow-y: scroll;
 
-    .my-bins-header {
+    .cleaner-bins-header {
       font-size: 25px;
       font-weight: 400;
       color: #3cb649;
@@ -29,7 +30,7 @@
       top: 15px;
     }
 
-    .container-for-my-bins {
+    .cleaner-container-for-bins {
       height: 300px;
       min-width: 800px;
       max-width: 2000px;
@@ -41,7 +42,7 @@
   }
 }
 
-.resident-bins-error {
+.cleaner-bins-loading {
   width: 800px;
   margin-top: 20px;
 
@@ -49,21 +50,11 @@
     left: auto;
     right: auto;
   };
-}
-
-.resident-bins-loading {
-  width: 800px;
-  margin-top: 40px;
 
   text-align: center;
-
-  margin: {
-    left: auto;
-    right: auto;
-  };
 }
 
-.resident-bins-warning {
+.cleaner-bins-error {
   width: 800px;
   margin-top: 40px;
 
@@ -71,4 +62,28 @@
     left: auto;
     right: auto;
   };
+
+  position: relative;
+
+  .error-btn {
+    left: -100px;
+    position: absolute;
+  }
+}
+
+.cleaner-bins-warning {
+  width: 800px;
+  margin-top: 40px;
+
+  margin: {
+    left: auto;
+    right: auto;
+  };
+
+  position: relative;
+
+  .warning-btn {
+    left: -100px;
+    position: absolute;
+  }
 }

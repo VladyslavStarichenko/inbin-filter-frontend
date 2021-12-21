@@ -1,6 +1,8 @@
 .resident-my-waste-container {
-  width: 700px;
+  width: 720px;
   height: 400px;
+
+  position: relative;
 
   margin: {
     left: auto;
@@ -24,8 +26,11 @@
     }
 
     .container-for-my-wastes {
-      padding-top: 10px;
+      padding-top: 50px;
       padding-bottom: 20px;
+
+      display: flex;
+      flex-flow: row nowrap;
     }
 
     .my-controls-container {
@@ -47,6 +52,12 @@
       }
     }
   }
+}
+
+.stripe-container {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
 }
 
 .resident-waste-error {

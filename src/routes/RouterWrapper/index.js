@@ -35,6 +35,10 @@ import ResidentStatistics from '../../screens/Authenticated/Resident/Pages/Stati
 import ResidentWaste from '../../screens/Authenticated/Resident/Pages/MyWaste/my-waste';
 import ResidentBin from '../../screens/Authenticated/Resident/Pages/MyBins/my-bins';
 
+// Cleaner
+import CleanerBins from '../../screens/Authenticated/Cleaner/Pages/Bins';
+import CleanerMainPage from '../../screens/Authenticated/Cleaner/Pages/MyPage';
+
 // Constants
 import { USER_ROLE } from '../../constants/users';
 
@@ -49,10 +53,6 @@ const NotFound = () => <div>
 </div>;
 
 const AdminFlats = () => <div><h1>Admin Flats.</h1></div>;
-
-const Cleaner = () => <div><h1>Cleaner main page.</h1></div>;
-const CleanerBin = () => <div><h1>Cleaner bin.</h1></div>;
-const CleanerStatistics = () => <div><h1>Cleaner statistics.</h1></div>;
 
 function RouterWrapper() {
   const auth = useAuth();
@@ -94,9 +94,8 @@ function RouterWrapper() {
     if (isEqual(userRole, USER_ROLE['ROLE_CLEANER'])) {
       routes = (
         <>
-          <Route path="/cleaner" element={<Cleaner />} />
-          <Route path="/cleaner/bin" element={<CleanerBin />} />
-          <Route path="/cleaner/statistics" element={<CleanerStatistics />} />
+          <Route path="/cleaner" element={<CleanerMainPage />} />
+          <Route path="/cleaner/bins" element={<CleanerBins />} />
         </>
       );
     }

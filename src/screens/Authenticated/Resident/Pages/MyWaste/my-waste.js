@@ -1,11 +1,13 @@
 // Modules
 import { useCallback, useEffect, useState } from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
+import Stripe from 'react-stripe-checkout';
 import { isEqual, size } from 'lodash';
 import cx from 'classnames';
 
 // Context
 import useAdminContext from '../../../../../hooks/useResident/useResidentContext';
+import useResidentContext from '../../../../../hooks/useResident/useResidentContext';
 
 // Components
 import ErrorMessage from '../../../Admin/Components/ErrorMessage';
@@ -20,7 +22,9 @@ import api from '../../../../../api';
 
 function MyWaste() {
   const { residentId } = useAdminContext();
+  const { hasDebt } = useResidentContext();
 
+  const [myBill, setMyBill] = useState();
   const [wastes, setWastes] = useState();
   const [numPage, setNumPage] = useState(0);
   const [noData, setNoData] = useState(false);
@@ -35,6 +39,11 @@ function MyWaste() {
   const onDecrement = useCallback(() => {
     setNumPage((prev) => prev - 1);
   }, []);
+
+  async function handleToken(token) {
+    const data = { token, amount: Math.abs(myBill['Total bill:']) };
+    await api.payment.chargeCard(data);
+  }
 
   useEffect(() => {
     async function getAllWastesByResidentPaginated() {
@@ -55,6 +64,22 @@ function MyWaste() {
     try {
       setIsLoading(true);
       getAllWastesByResidentPaginated();
+    } catch (error) {
+      console.log(error.message);
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
+
+    async function getResidentBillAsync() {
+      const response = await api.waste.getMyBill();
+      const data = await response.data;
+      setMyBill(data);
+    }
+
+    try {
+      setIsLoading(true);
+      getResidentBillAsync();
     } catch (error) {
       console.log(error.message);
       setHasError(true);
@@ -130,6 +155,14 @@ function MyWaste() {
           )}
         </div>
       </div>
+      {hasDebt && (
+        <div className="stripe-container">
+          <Stripe
+            stripeKey="pk_test_51K470nA5ndul63kt012jwvJexZhe3CrGJBPzzL1gOE0hGMgTK4fkggf5mriFzOoqlw7rp6Eau04wXfiGfFS8w4Jb006FYxkKtM"
+            token={handleToken}
+          />
+        </div>
+      )}
     </div>
   );
 }

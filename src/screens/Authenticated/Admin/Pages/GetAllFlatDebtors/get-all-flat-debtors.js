@@ -35,6 +35,21 @@ function GetAllFlatDebtors() {
     setNumPage((prev) => prev - 1);
   }, []);
 
+  const onSendNotifications = useCallback(() => {
+    async function sendNotifications() {
+      await api.notification.createNotifications(flatId);
+    }
+
+    try {
+      sendNotifications();
+      alert('Notifications were successfuly sent!');
+    } catch (error) {
+      alert('Oooopss, an error occured.');
+      console.log(error.message);
+    }
+
+  }, [flatId]);
+
   useEffect(() => {
     async function getAllFlatDebtorsReq() {
       const request = { id: flatId, pageNumber: numPage, pageSize: 3};
@@ -82,7 +97,7 @@ function GetAllFlatDebtors() {
     contentOfPage = (
       <div className="residents-wrapper">
         <h2 className="debtors-header">All residents by chosen flat</h2>
-        <div className="container-for-residents">
+        <div className="container-for-debtors">
           {debtorsByFlat.residentGetDtoList.map((debtor) => {
             const { address, bill, id, name } = debtor;
             return (
@@ -91,11 +106,12 @@ function GetAllFlatDebtors() {
                 bill={bill}
                 id={id}
                 name={name}
+                key={id}
               />
             );
           })}
         </div>
-        <div className="controls-container">
+        <div className="admin-controls-container">
           {isEqual(numPage, 0) ? (
             <Button
               onClick={onIncrement}
@@ -126,6 +142,16 @@ function GetAllFlatDebtors() {
             </>
           )}
         </div>
+        {debtorsByFlat.residentGetDtoList.length !== 0 && (
+          <Button
+            onClick={onSendNotifications}
+            className="send-notifications-btn"
+            variant="contained"
+            color="primary"
+          >
+            Send notifications
+          </Button>
+        )}
       </div>
     );
   }

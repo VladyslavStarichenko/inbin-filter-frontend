@@ -1,21 +1,27 @@
+// Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+// Providers
 import AuthProvider from '../src/providers/AuthProvider';
 import AdminContextProvider from '../src/providers/AdminProvider';
 import ResidentContextProdiver from '../src/providers/ResidentProvider';
+import CleanerContextProdiver from '../src/providers/CleanerProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <AdminContextProvider>
         <ResidentContextProdiver>
-          <Router>
-            <App />
-          </Router>
+          <CleanerContextProdiver>
+            <Router>
+              <App />
+            </Router>
+          </CleanerContextProdiver>
         </ResidentContextProdiver>
       </AdminContextProvider>
     </AuthProvider>
