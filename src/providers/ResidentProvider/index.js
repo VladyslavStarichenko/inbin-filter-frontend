@@ -6,10 +6,13 @@ export const ResidentContext = createContext();
 function ResidentContextProdiver(props) {
   const { children } = props;
 
+  const [hasDebt, setHasDebt] = useState(false);
   const [residentId, setResidentId] = useState();
   const [flatAddress, setFlatAddress] = useState();
 
   const contextValue = {
+    hasDebt,
+    setHasDebt,
     residentId,
     setResidentId,
     flatAddress,

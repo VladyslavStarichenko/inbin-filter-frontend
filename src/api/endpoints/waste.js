@@ -5,6 +5,7 @@ const wasteBaseURL = '/house-complex/flat/residents/waste';
 
 const endpoints = Object.freeze({
   commitWaste: (data) => axios.post(`${wasteBaseURL}`, data),
+  getMyBill: () => axios.get(`${wasteBaseURL}/myBill`),
   getAllWastesByFlat: (flatAddress) => (
     axios.get(`${wasteBaseURL}/litterType/statistics/flat/${flatAddress}`)),
   getAllWastesByResident: (residentId) => (

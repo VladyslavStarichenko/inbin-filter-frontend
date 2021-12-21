@@ -22,6 +22,10 @@
     text-align: center;
   }
 
+  .container-for-debtors {
+    display: flex;
+  }
+
   .get-all-debtors-container {
     width: 640px;
     height: 360px;
@@ -33,7 +37,9 @@
     align-items: center;
     justify-content: flex-start;
 
-    .controls-container {
+    position: relative;
+
+    .admin-controls-container {
       top: 20px;
       width: 640px;
       text-align: center;
@@ -54,6 +60,12 @@
         width: 152px;
         margin-right: 20px;
       }
+    }
+
+    .send-notifications-btn {
+      left: 0;
+      bottom: -40px;
+      position: absolute;
     }
   }
 }

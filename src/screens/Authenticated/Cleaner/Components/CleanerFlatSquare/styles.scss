@@ -1,0 +1,35 @@
+.cleaner-flat-square-container {
+  height: 220px;
+  width: 190px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  background-color: rgb(235, 233, 233);
+
+  margin-left: 30px;
+  margin-right: 10px;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  .cleaner-flat-image {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  .control-btn {
+    height: 30px;
+    width: 180px;
+    margin: {
+      top: 10px;
+      left: auto;
+      right: auto;
+    }
+    font-size: 9px;
+  }
+
+  .cleaner-address-block {
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+  }
+}

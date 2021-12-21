@@ -47,7 +47,7 @@ function Header() {
 
   const getMyProfile = useCallback(() => {
     navigate('/resident');
-  }, []);
+  }, [navigate]);
 
   const checkMyWasteResident = useCallback(() => {
     navigate('/resident/waste');
@@ -59,10 +59,6 @@ function Header() {
 
   const getMyStatisticsResident = useCallback(() => {
     navigate('/resident/statistics');
-  }, [navigate]);
-
-  const getFlatsCleaner = useCallback(() => {
-    navigate('/flats');
   }, [navigate]);
 
   const notLoggedInBtns = useMemo(() => {
@@ -103,9 +99,7 @@ function Header() {
 
     if (isEqual(userRole, USER_ROLE['ROLE_CLEANER']) ||
     isEqual(localStorage.getItem('user-role'), USER_ROLE['ROLE_CLEANER'])) {
-      btnsByUserRole = {
-        flats: { label: 'Flats', handler: getFlatsCleaner },
-      };
+      btnsByUserRole = {};
     }
 
     if (userRole) {
@@ -122,7 +116,6 @@ function Header() {
       checkMyBinResident,
       checkMyWasteResident,
       getFlatsAdmin,
-      getFlatsCleaner,
       getMyProfile,
       getMyStatisticsResident,
       getStatisticsAdmin,
