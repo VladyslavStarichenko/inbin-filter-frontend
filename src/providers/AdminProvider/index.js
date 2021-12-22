@@ -8,6 +8,7 @@ function AdminContextProdiver(props) {
 
   const [flatId, setFlatId] = useState();
   const [residentId, setResidentId] = useState();
+  const [language, setLanguage] = useState('');
   const [residentWasteId, setResidentWasteId] = useState();
   const [flatAddress, setFlatAddress] = useState('');
   const [houseComplex, setHouseComplex]= useState({});
@@ -32,6 +33,8 @@ function AdminContextProdiver(props) {
     setHasUserComplex,
     residentWasteId,
     setResidentWasteId,
+    language,
+    setLanguage,
   };
 
   return (

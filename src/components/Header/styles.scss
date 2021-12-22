@@ -6,6 +6,23 @@
   flex-flow: row wrap;
   justify-content: space-between;
 
+  .name-select {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    & > div:last-child {
+      left: 50px;
+      bottom: 6px;
+      position: relative;
+
+      & > div {
+        width: 100px;
+      }
+    }
+  }
+
   &::after {
     left: 0;
     bottom: 0;
